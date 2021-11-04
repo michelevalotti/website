@@ -1,0 +1,105 @@
+@keyframes bounce {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+    to {
+        transform: translate3d(0, -30%, 0);
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(90deg, rgba(194,105,10,1) 0%, rgba(150,44,44,1) 100%);
+    margin: 0%;
+}
+
+h1 {
+    color: rgb(60, 60, 60);
+    border: 3px solid grey;
+    border-radius: 10px;
+    position: relative;
+    text-align: center;
+    padding: 0% 0%;
+    /* half the width/height of box shifts it to the middle for top/left attrs */
+    margin-left: -190px;
+    margin-top: -35px;
+    top: 50vh;
+    left: 50vw;
+
+    display: inline-block;
+
+    font-family: 'Avantgarde', 'TeX Gyre Adventor', 'URW Gothic L', sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+circle {
+    display: inline-block;
+    position: absolute;
+    border:5px solid rgb(89, 89, 89);
+    z-index: -1;
+    background: linear-gradient(90deg, rgba(150,44,44,1) 0%, rgba(194,105,10,1) 100%);
+    border-radius: 100%;
+    margin-left: -350px;
+    margin-top: -350px;
+    width: 700px;
+    height: 700px;
+    top: 50vh;
+    left: 50vw;
+    text-align: center;
+    padding: 0% 0%;
+}
+
+p {
+    text-transform: uppercase;
+    line-height: 0;
+    display: inline-block;
+}
+p::first-letter {
+    text-transform: uppercase;
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Segoe UI', sans-serif;
+    letter-spacing: 3px;
+}
+
+dot {
+    position: relative;
+    display: inline-block;
+    
+    animation-name: bounce;
+    animation-duration:  0.3s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+
+    font-size: 50px;
+    font-family: Georgia;
+}
+
+#dot1{
+    animation-duration:  0.3s;
+    animation-delay: 0s;
+    color: rgb(150, 44, 44);
+}
+
+#dot2{
+    animation-duration:  0.4s;
+    animation-delay: 0.1s;
+    color: rgb(194, 105, 10);
+}
+
+#dot3{
+    animation-duration:  0.5s;
+    animation-delay: 0.2s;
+    color: rgb(201, 153, 9);
+}
+
+.banner {
+    background-color: lightgrey;
+    width: 380px;
+    height: 70px;
+}
