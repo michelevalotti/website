@@ -1,3 +1,10 @@
+/* 
+dark blue: #194769
+cream: #f6f6e9
+light blue: #d7eef2
+orange: #f2855e
+*/
+
 @keyframes bounce {
     from {
         transform: translate3d(0, 0, 0);
@@ -9,18 +16,18 @@
 
 * {
     box-sizing: border-box;
+    font-family: 'Avantgarde', 'TeX Gyre Adventor', 'URW Gothic L', sans-serif;
 }
 
 body {
-    background: linear-gradient(90deg, rgba(194,105,10,1) 0%, rgba(150,44,44,1) 100%);
+    background: #194769;
     margin: 0%;
 }
 
-h1 {
-    color: rgb(60, 60, 60);
-    border: 3px solid grey;
+h1.banner {
+    border: 3px solid #d7eef2;
     border-radius: 10px;
-    position: relative;
+    position: absolute;
     text-align: center;
     padding: 0% 0%;
     /* half the width/height of box shifts it to the middle for top/left attrs */
@@ -31,17 +38,20 @@ h1 {
 
     display: inline-block;
 
-    font-family: 'Avantgarde', 'TeX Gyre Adventor', 'URW Gothic L', sans-serif;
     font-weight: normal;
     text-transform: uppercase;
+
+    background-color: #194769;
+    width: 380px;
+    height: 70px;
 }
 
 circle {
     display: inline-block;
     position: absolute;
-    border:5px solid rgb(89, 89, 89);
+    /* border:5px solid #1a2639; */
     z-index: -1;
-    background: linear-gradient(90deg, rgba(150,44,44,1) 0%, rgba(194,105,10,1) 100%);
+    /* background: linear-gradient(90deg, rgba(150,44,44,1) 0%, rgba(194,105,10,1) 100%); */
     border-radius: 100%;
     margin-left: -350px;
     margin-top: -350px;
@@ -57,6 +67,7 @@ p {
     text-transform: uppercase;
     line-height: 0;
     display: inline-block;
+    color: #d7eef2;
 }
 p::first-letter {
     text-transform: uppercase;
@@ -64,6 +75,7 @@ p::first-letter {
     font-weight: bold;
     font-family: 'Segoe UI', sans-serif;
     letter-spacing: 3px;
+    color: #f2855e;
 }
 
 dot {
@@ -81,25 +93,169 @@ dot {
 }
 
 #dot1{
-    animation-duration:  0.3s;
     animation-delay: 0s;
-    color: rgb(150, 44, 44);
+    color: #eb5033;
 }
 
 #dot2{
-    animation-duration:  0.4s;
     animation-delay: 0.1s;
-    color: rgb(194, 105, 10);
+    color: #ff9a3c;
 }
 
 #dot3{
-    animation-duration:  0.5s;
     animation-delay: 0.2s;
-    color: rgb(201, 153, 9);
+    color: #ffd82c;
 }
 
-.banner {
-    background-color: lightgrey;
-    width: 380px;
-    height: 70px;
+
+label {
+    width: 0;
+    height: 0;
+    display: inline-block;
+    position: relative;
+}
+
+
+.hamburgercheckbox {
+    position: relative;
+    visibility: hidden;
+    display: inline-block;
+}
+
+.hamburger {
+    margin: 0;
+    width: 30px;
+    height: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+.bar {
+    padding: 0;
+    width: 30px;
+    height: 4px;
+    background-color: #f2855e;
+    border-radius: 4px;
+    position: absolute; 
+    display: inline-block;
+
+    transition: all 0.2s ease-in-out;
+}
+
+
+#bar1 {
+    top: 0;
+}
+
+#bar2 {
+    top: 10px;
+}
+
+#bar3 {
+    top: 20px;
+}
+
+.hamburgercheckbox:checked {
+    pointer-events: none;
+}
+
+.hamburgercheckbox:checked + label > .hamburger > #bar1 {
+    width: 50%;
+    transform-origin: 0%;
+    transform: translateX(5px) rotate(45deg);
+}
+.hamburgercheckbox:checked + label > .hamburger > #bar2 {
+    width: 90%;
+    transform: translateX(1px) rotate(-45deg);
+}
+.hamburgercheckbox:checked + label > .hamburger > #bar3 {
+    width: 50%;
+    transform-origin: 100%;
+    transform: translateX(10px) rotate(45deg);
+}
+
+.hamburgercheckbox:hover + label > .hamburger > #bar1{
+    width: 50%;
+}
+.hamburgercheckbox:hover:not(.hamburgercheckbox:checked) + label > .hamburger > #bar3{
+    width: 50%;
+    transform: translateX(15px)
+}
+
+#toplefthbcb {
+    padding: 0;
+    margin: 0;
+    position: relative;
+    display: inline-block;
+    width: 0;
+    height: 0;
+}
+
+
+.topbar {
+    width: 100%;
+    display: inline-block;
+    padding: 20px;
+    margin: 0;
+    position: relative;
+    top: 0;
+    left: 0;
+    background-color: #f6f6e9;
+}
+
+.pagebuttons {
+    display: inline-block;
+    position: relative;
+    left: 100px;
+    width: 90%;
+}
+
+.pagebutton {
+    display: inline-block;
+    position: relative;
+    padding: 10px 20px;
+    margin: 2px 20px;
+    border-radius: 30px;
+    color: #194769;
+}
+
+.logo {
+    padding: 3px 20px;
+    margin: 0;
+    color: #194769;
+    float: right;
+}
+
+
+.pagebutton:hover {
+    color: #f2855e;
+    background-color: #194769;
+    transition: background-color 0.2s linear;
+}
+
+.dropdown {
+    box-sizing: border-box;
+    position:absolute;
+    width: 250px;
+    height: 100vw;
+    margin: 0;
+    padding: 0;
+    background: #d7eef2;
+    z-index: -1;
+
+    top: 68px;
+    left: -250px;
+
+    transition: all 0.2s ease-in-out;
+}
+
+h3.pagebutton {
+    top: 0;
+    position: relative;
+    margin: 50px 30px;
+    font-size: 30px;
+}
+
+.hamburgercheckbox:checked ~ .dropdown{
+    left: 0;
 }
