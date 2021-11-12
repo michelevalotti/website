@@ -3,37 +3,53 @@
 
 <head>
     <link rel='stylesheet' href='style.css'>
+    <link rel='stylesheet' href='burger_style.css'>
+    <link rel='stylesheet' href='topbar_content_style.css'>
+    <link rel='stylesheet' href='side_menu_style.css'>
+    <link rel='stylesheet' href='arrow_style.css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
     <title>Welcome to my website!</title>
 </head>
 
 <body>
 
-    <div class='topbar'>
-
-        <input type="checkbox" class="hamburgercheckbox" id="toplefthbcb"/>
-        <label for="toplefthbcb">
-            <div class="hamburger">
-            <span class="bar" id="bar1"></span>
-            <span class="bar" id="bar2"></span>
-            <span class="bar" id="bar3"></span>
-            </div>
-        </label>
-
-        <div class='dropdown pagebuttons'>
-            <br><h3 class='pagebutton' id='page1'><a ref=#>KEEP</a></h3>
-            <br><h3 class='pagebutton' id='page2'><a ref=#>YOUR</a></h3>
-            <br><h3 class='pagebutton' id='page3'><a ref=#>EYES</a></h3>
-            <br><h3 class='pagebutton' id='page4'><a ref=#>PEELED</a></h3>
+    <div class='side--menu' id='side--menu'>
+        <div class="arrow--menu" id="arrow--menu">
+            <span class="arrowbar" id="arrowbar1"></span>
+            <span class="arrowbar" id="arrowbar2"></span>
+            <span class="arrowbar" id="arrowbar3"></span>
         </div>
-
-        <h3 class='logo'>MY LOGO</h3>
-
+        <div class='page--button', id='projects--page'><a ref='#'>PROJECTS</a></div>
+        <div class='page--button', id='blog--page'><a ref='#'>BLOG</a></div>
+        <div class='page--button', id='about--me--page'><a ref='#'>ABOUT ME</a></div>
+        <div class='page--button', id='contacts--page'><a ref='#'>CONTACTS</a></div>
     </div>
 
-    <h1 class='banner'><p>coming</p> <p>soon</p> <dot id='dot1'>.</dot><dot id='dot2'>.</dot><dot id='dot3'>.</dot></h1>
+    <div class='main--body' id='main--body'>
+        <div class='top--bar' id='top--bar'>
+            <div class="burger--menu" id="burger--menu">
+                <span class="burgerbar" id="burgerbar1"></span>
+                <span class="burgerbar" id="burgerbar2"></span>
+                <span class="burgerbar" id="burgerbar3"></span>
+            </div>
+            <div class="topbar--content" id="topbar--content">
+                SITE TITLE
+            </div>
+            <div class="logo" id="logo">
+                MY LOGO
+            </div>
+        </div>
+        <div class='content--page' id='content--page'>
+            <div class="content1">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam aliquid ab repudiandae assumenda soluta voluptates veniam deleniti laboriosam! Assumenda atque modi quo doloribus omnis numquam.</p>
+            </div>
+            <div class="content2">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, alias quis atque, doloremque ipsum molestiae illum accusantium ea nesciunt animi a quod velit asperiores provident?</p>
+            </div>
+        </div>
+    </div>
 
-    <circle></circle>
-
+    <script src="./apps.js"></script>
 </body>
 
-</html>
+</html

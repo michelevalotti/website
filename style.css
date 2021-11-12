@@ -1,261 +1,107 @@
-/* 
-dark blue: #194769
-cream: #f6f6e9
-light blue: #d7eef2
-orange: #f2855e
-*/
+:root {
+    --side-menu-width: 200px;
+    --top-bar-height: 60px;
 
-@keyframes bounce {
-    from {
-        transform: translate3d(0, 0, 0);
-    }
-    to {
-        transform: translate3d(0, -30%, 0);
-    }
+    --dark-bg-color: #194769;  /* dark blue */
+    --light-color-1: #d7eef2;  /* light blue */
+    --light-color-2: #f6f6e9;  /* cream */
+    --accent-color: #f2855e;  /* orange */
+
+    --sidemenu-transition-len: 0.3s;
+    --sidemenu-transition-curve: ease-out;
 }
 
 * {
+    margin: 0;
     box-sizing: border-box;
     font-family: 'Avantgarde', 'TeX Gyre Adventor', 'URW Gothic L', sans-serif;
 }
 
-body {
-    background: #194769;
-    margin: 0%;
+#side--menu {
+    position: fixed;
+    height: 100vh;
+    z-index: 10;
+}
+.side--menu {
+    background-color: var(--light-color-1);
+    width: var(--side-menu-width);
+    left: calc(var(--side-menu-width) * -1);
+
+    transition-property: all;
+    transition-timing-function: var(--sidemenu-transition-curve);
+    transition-duration: var(--sidemenu-transition-len);
 }
 
-h1.banner {
-    border: 3px solid #d7eef2;
-    border-radius: 10px;
-    position: absolute;
-    text-align: center;
-    padding: 0% 0%;
-    /* half the width/height of box shifts it to the middle for top/left attrs */
-    margin-left: -190px;
-    margin-top: -35px;
-    top: 50vh;
-    left: 50vw;
+#main--body{
+    position: relative;
+}
+.main--body {
+    left: 0;
 
-    display: inline-block;
-
-    font-weight: normal;
-    text-transform: uppercase;
-
-    background-color: #194769;
-    width: 380px;
-    height: 70px;
+    transition-property: all;
+    transition-timing-function: var(--sidemenu-transition-curve);
+    transition-duration: var(--sidemenu-transition-len);
 }
 
-circle {
-    display: inline-block;
-    position: absolute;
-    /* border:5px solid #1a2639; */
-    z-index: -1;
-    /* background: linear-gradient(90deg, rgba(150,44,44,1) 0%, rgba(194,105,10,1) 100%); */
-    border-radius: 100%;
-    margin-left: -350px;
-    margin-top: -350px;
-    width: 700px;
-    height: 700px;
-    top: 50vh;
-    left: 50vw;
-    text-align: center;
-    padding: 0% 0%;
+.top--bar {
+    height: var(--top-bar-height);
+    width: 100%;
+    position: fixed;
+    right: 0;
+
+    background-color: var(--light-color-2);
+
+    transition-property: all;
+    transition-timing-function: var(--sidemenu-transition-curve);
+    transition-duration: var(--sidemenu-transition-len);
 }
 
-p {
-    text-transform: uppercase;
-    line-height: 0;
-    display: inline-block;
-    color: #d7eef2;
+
+.content--page {
+    background-color: var(--dark-bg-color);
+    padding-top: calc(var(--top-bar-height) + 15px);
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+
+    color: var(--light-color-2);
 }
+
 p::first-letter {
     text-transform: uppercase;
-    font-size: 50px;
+    font-size: 24px;
     font-weight: bold;
     font-family: 'Segoe UI', sans-serif;
     letter-spacing: 3px;
-    color: #f2855e;
+    color: var(--accent-color);
 }
 
-dot {
-    position: relative;
-    display: inline-block;
-    
-    animation-name: bounce;
-    animation-duration:  0.3s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-timing-function: ease-in-out;
-
-    font-size: 50px;
-    font-family: Georgia;
-}
-
-#dot1{
-    animation-delay: 0s;
-    color: #eb5033;
-}
-
-#dot2{
-    animation-delay: 0.1s;
-    color: #ff9a3c;
-}
-
-#dot3{
-    animation-delay: 0.2s;
-    color: #ffd82c;
+.content2 {
+    height: 1400px;
 }
 
 
-label {
-    width: 0;
-    height: 0;
-    display: inline-block;
-    position: relative;
+/* classes for side menu clicks */
+
+.side--menu--shift--top--bar {
+    left:0;
+    /* this does not account for the scrollbar, but it's only
+    a problem for the topbar (since it has pos fixed) and I can
+    just move the rightmost element a bit to the left */
+    width: calc(100vw - var(--side-menu-width));
+    margin-left: var(--side-menu-width);
 }
 
-
-.hamburgercheckbox {
-    position: relative;
-    visibility: hidden;
-    display: inline-block;
+.side--menu--shift--main--body {
+    left: var(--side-menu-width);
+    margin-right: var(--side-menu-width);
 }
 
-.hamburger {
-    margin: 0;
-    width: 30px;
-    height: 20px;
-    position: relative;
-    display: inline-block;
+.side--menu--shift--side--menu {
+    left:0;
 }
 
-.bar {
-    padding: 0;
-    width: 30px;
-    height: 4px;
-    background-color: #f2855e;
-    border-radius: 4px;
-    position: absolute; 
-    display: inline-block;
-
-    transition: all 0.2s ease-in-out;
-}
-
-
-#bar1 {
-    top: 0;
-}
-
-#bar2 {
-    top: 10px;
-}
-
-#bar3 {
-    top: 20px;
-}
-
-.hamburgercheckbox:checked {
-    pointer-events: none;
-}
-
-.hamburgercheckbox:checked + label > .hamburger > #bar1 {
-    width: 50%;
-    transform-origin: 0%;
-    transform: translateX(5px) rotate(45deg);
-}
-.hamburgercheckbox:checked + label > .hamburger > #bar2 {
-    width: 90%;
-    transform: translateX(1px) rotate(-45deg);
-}
-.hamburgercheckbox:checked + label > .hamburger > #bar3 {
-    width: 50%;
-    transform-origin: 100%;
-    transform: translateX(10px) rotate(45deg);
-}
-
-.hamburgercheckbox:hover + label > .hamburger > #bar1{
-    width: 50%;
-}
-.hamburgercheckbox:hover:not(.hamburgercheckbox:checked) + label > .hamburger > #bar3{
-    width: 50%;
-    transform: translateX(15px)
-}
-
-#toplefthbcb {
-    padding: 0;
-    margin: 0;
-    position: relative;
-    display: inline-block;
-    width: 0;
-    height: 0;
-}
-
-
-.topbar {
-    width: 100%;
-    display: inline-block;
-    padding: 20px;
-    margin: 0;
-    position: relative;
-    top: 0;
-    left: 0;
-    background-color: #f6f6e9;
-}
-
-.pagebuttons {
-    display: inline-block;
-    position: relative;
-    left: 100px;
-    width: 90%;
-}
-
-.pagebutton {
-    display: inline-block;
-    position: relative;
-    padding: 10px 20px;
-    margin: 2px 20px;
-    border-radius: 30px;
-    color: #194769;
-}
-
-.logo {
-    padding: 3px 20px;
-    margin: 0;
-    color: #194769;
-    float: right;
-}
-
-
-.pagebutton:hover {
-    color: #f2855e;
-    background-color: #194769;
-    transition: background-color 0.2s linear;
-}
-
-.dropdown {
-    box-sizing: border-box;
-    position:absolute;
-    width: 250px;
-    height: 100vw;
-    margin: 0;
-    padding: 0;
-    background: #d7eef2;
-    z-index: -1;
-
-    top: 68px;
-    left: -250px;
-
-    transition: all 0.2s ease-in-out;
-}
-
-h3.pagebutton {
-    top: 0;
-    position: relative;
-    margin: 50px 30px;
-    font-size: 30px;
-}
-
-.hamburgercheckbox:checked ~ .dropdown{
-    left: 0;
+.side--menu--overflow {
+    left:0;
+    width: 100vw;
 }
