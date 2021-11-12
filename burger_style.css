@@ -1,0 +1,49 @@
+.burger--menu {
+    margin: 0;
+    width: 30px;
+    height: 24px;
+    z-index: 20;
+    cursor: pointer;
+    position: absolute;
+    top: 17px;
+    left: 20px;
+    display: inline-block;
+}
+
+.burger--menu--clicked {
+    visibility: hidden;
+}
+
+.burgerbar {
+    display: block;
+    position: relative;
+    left: 0;
+    opacity: 1;
+    padding: 0;
+    width: 30px;
+    height: 4px;
+    background-color: var(--accent-color);
+    border-radius: 4px;
+    margin-bottom: 6px;
+
+    transition: all 0.2s ease-in-out;
+}
+
+.burgerbar1--clicked {
+    left: -30px;
+    opacity: 0;
+}
+.burgerbar2--clicked {
+    opacity: 0;
+}
+.burgerbar3--clicked {
+    left: 30px;
+    opacity: 0;
+}
+
+.burgerbar1--hover{
+    left: -5px;
+}
+.burgerbar3--hover{
+    left: 5px;
+}
