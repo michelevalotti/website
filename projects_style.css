@@ -1,0 +1,346 @@
+.disappear--under {
+    position: absolute;
+    height: 100%;
+    width: 2000px;
+    left: -1970px;  /* -width + margin */
+    z-index: 3;
+    background-color: rgb(var(--bg-color), 1);
+}
+
+
+#projects--container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    width: 100%;
+}
+
+
+.card--container {
+    --container-height: 350px;
+    --expanded-explanation-height: 500px;
+
+    height: var(--container-height);
+    transition: height 0.2s ease-in-out;
+}
+
+@media screen and (max-width: 900px) {
+    .card--container {
+        --expanded-explanation-height: 800px;
+    }
+}
+
+.card--container--expanded {
+    height: calc(var(--container-height) + var(--expanded-explanation-height));
+}
+
+
+
+.project--card {
+    position: relative;
+    width: 230px;
+    margin: 50px auto 0 auto;
+    height: calc(var(--container-height) - 50px);
+
+    border-radius: 20px;
+    background-color: rgb(var(--content-color-600), 1);
+
+    border: 5px solid;
+    border-color: rgba(var(--accent-color), 0.0);
+    background-clip: padding-box;
+    cursor: pointer;
+
+    transition: border-color 0.4s ease, background-color var(--color-transition-len) ease, color var(--color-transition-len) ease, opacity 0.4s ease;
+}
+.project--card--line {
+    display: block;
+    position: relative;
+    width: calc(100% - 20px);
+    height: 3px;
+    background-color: rgba(var(--bg-color), 1);
+    margin: 0 10px;
+    top: 40%;
+    transform-origin: left;
+    transform: scaleX(0);
+    opacity: 0.4;
+
+    transition: transform 0.2s linear, opacity 0.2s linear;
+}
+.project--card--title {
+    color: rgba(var(--content-color-400), 1);
+    display: inline-block;
+    position: absolute;
+    margin: 20px;
+    line-height: 1.5em;
+    
+    bottom: 10px;
+    opacity: 1;
+
+    transition-property: top, transform, opacity, color;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+}
+.project--card--title > mark {
+    display: inline;
+    width: 100%;
+    padding: 0 5px;
+    background: linear-gradient(to right, rgb(var(--bg-color), 1) 50%, transparent 50%);
+    background-size: 202% 100%;
+    background-position: right bottom;
+    transition: background-position 0.2s linear, color 0.2s linear;
+    transition-delay: 0.05s;
+
+    color: rgb(var(--bg-color), 1);
+}
+.card--highlight--active {
+    background-position: left bottom !important;
+    color: rgb(var(--content-color-400), 1) !important;
+}
+
+.background--gradient {
+    border-radius: 14px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, rgb(var(--content-color-400), 0.8) 0%, rgb(var(--bg-color), 0.8) 100%);
+}
+
+.project--card--active {
+    border-color: rgba(var(--accent-color), 1);
+}
+.project--card--span--active {
+    transform: scaleX(1);
+    opacity: 1;
+}
+
+.project--explanation {
+    margin: 15px;
+    position:absolute;
+    width: calc(100% - 60px);  /* a bit hardcoded but quick and easy, container margin is 30px */
+    left: 15px;  /* see above comment */
+    height: 0px;
+    transition: height 0.2s ease-in-out, background-color var(--color-transition-len) ease, color var(--color-transition-len) ease;
+
+    background-color: rgb(var(--bg-color), 1);
+}
+.project--explanation--expanded {
+    height: var(--expanded-explanation-height);  /* this could be dynamically defined in js to fit the content of the project, not done atm for aesthetic reasons */
+}
+
+
+.explanation--paragraph {
+    position: relative;
+}
+
+.explanation--content {
+    position: relative;
+    left: -2000px;
+    visibility: hidden;
+    height: var(--expanded-explanation-height);
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out, left 0.2s cubic-bezier(1, 0.42, 0, 0.61);
+}
+.explanation--content--expanded {
+    left: 0;
+    visibility: visible;
+}
+
+
+#qubits--card {
+    background-image: url(imgs/qec_mod.jpg);
+    background-size: cover;
+}
+#ssvep--robot--card {
+    background-image: url(imgs/ssvep_mod_highres.jpg);
+    background-size: cover;
+}
+#quantum--dynamics--card {
+    background-image: url(imgs/qdyn_mod.jpg);
+    background-size: cover;
+}
+#game--of--life--card {
+    background-image: url(imgs/gol_mod.jpg);
+    background-size: cover;
+}
+#boids--card {
+    background-image: url(imgs/boids_mod.jpg);
+    background-size: cover;
+}
+#wordle--card {
+    background-image: url(imgs/wordle.png);
+    background-size: cover;
+}
+
+
+.coming--soon--banner {
+    border: 1px solid rgba(var(--content-color-400), 1);
+    border-radius: 20px;;
+    position: relative;
+    height: 200px;
+    width: 240px;
+    margin-left: -120px;
+    left: 50%;
+    top: 50%;
+    top: calc(calc(var(--expanded-explanation-height)/2) - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.coming--soon--banner > h2 {
+    font-size: 30px;
+    text-align: center;
+}
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+.dot {
+    display: inline-block;
+    animation: bounce 0.7s infinite;
+    animation-timing-function: cubic-bezier(0.72, 0.54, 0.13, 0.63);
+}
+.dot-2 {
+    animation-delay: 0.1s;
+}
+.dot-3 {
+    animation-delay: 0.2s;
+    color: rgba(var(--accent-color), 1);
+}
+
+
+/* ////////////////////////////////////////////////////////////////// */
+
+
+#wordle--content {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+}
+
+#wordle--clone--container {
+    position: relative;
+    display: flex;
+    place-items: center;
+    flex-direction: row;
+    height: 100%;
+}
+
+#letter--list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(35px, 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(45px, 1fr));
+    column-gap: 5px;
+    row-gap: 5px;
+    width: max(230px, 80%);
+    margin-right: 50px;
+}
+span.letter {
+    border: 1px solid rgba(var(--content-color-600), 1);
+    place-self: center;
+    height:45px;
+    width: 35px;
+    border-radius: 8px;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    cursor: pointer;
+    user-select: none;
+    color: rgb(var(--content-color-400));
+}
+#enter,
+#backspace {
+    grid-row-start: 1;
+    grid-column: span 3;
+    width: 115px;
+}
+
+#game--board {
+    display: grid;
+    grid-template-columns: repeat(5, 45px);
+    grid-template-rows: repeat(6, 45px);
+    justify-content: center;
+    width: max(230px, 80%);
+    margin: 10% 0;
+}
+#game--board > span.board--tile {
+    border: 1px solid rgb(var(--content-color-600), 1);
+    height: 40px;
+    width: 40px;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    color: rgb(var(--content-color-400));
+}
+
+.endscreen {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(var(--bg-color), 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+    opacity: 0;
+    transition: 0.5s opacity linear, 0.5s z-index linear;
+}
+.endscreen--active {
+    z-index: 1;
+    opacity: 1;
+}
+.endscreen > p {
+    width: min(90%, 300px);
+    text-align: center;
+    font-size: 50px;
+    color: rgb(var(--content-color-400), 1);
+    border: 3px solid rgb(var(--content-color-400), 1);
+}
+#solution--message {
+    margin-top: 10px;
+    font-size: 20px;
+    border: none;
+    border-bottom: 2px solid rgb(var(--content-color-400), 1);
+}
+.endscreen > p::first-letter {
+    font-size: inherit;
+    font-weight: inherit;
+    font-family: inherit;
+    color: inherit;
+}
+
+.reset--arrow {
+    margin-top: 20px;
+    width: 100px;
+    height: 100px;
+    transition: transform 0.2s linear;
+}
+.reset--arrow > svg {
+    position: relative;
+    display: inline-block;
+    font-size: 60px;
+    top: 20px;
+    left: 20px;
+    color: rgb(var(--accent-color), 1);
+}
+.reset--arrow--hover {
+    transform: rotate(30deg);
+}
+.reset--arrow--clicked {
+    transform: rotate(90deg);
+}
+
+
+@media screen and (max-width: 900px) {
+    #wordle--clone--container {
+        flex-direction: column;
+    }
+    #letter--list {
+        margin-right: 0;
+    }
+}
+
+/* ////////////////////////////////////////////////////////////////// */

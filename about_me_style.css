@@ -1,0 +1,332 @@
+#about--me--page {
+    height: auto;
+    /* this is so that the href lands just before start of timeline */
+    /* it's a hack ik but it was an afterthought */
+    border-top: 100px solid transparent;
+    /* border: none; */
+}
+
+.city--container {
+    display: flex;
+    margin: 0;
+}
+
+.city--description {
+    width: 65%;
+    padding: 10px;
+    order: 1;
+}
+.city--description > p {
+    margin-right: 50px;
+    margin-top: 5px;
+}
+.city--description > p:first-child {
+    margin-top: 50px;
+}
+.city--description > p:last-child {
+    padding-bottom: 70px;
+}
+
+
+#milan--description {
+    order: 2;
+}
+#milan--description > p {
+    margin-right: 0;
+    margin-left: 50px;
+}
+
+
+.city--name {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    order: 2;
+    white-space: pre-line;
+}
+
+#milan--name {
+    order: 1;
+}
+
+.city--name > h1 {
+    margin: 0;
+    margin-top: 50px;
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    font-size: 130px;
+    font-family: 'Impact', sans-serif;
+    font-weight: 900;
+
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    background-size: cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    line-height: 0.8em;
+    height: 5em;
+}
+
+
+#durham--name > h1 {
+    background-image: url(imgs/durham.jpg);
+}
+#milan--name > h1 {
+    background-image: url(imgs/milan.jpg);
+}
+#oxford--name > h1 {
+    background-image: url(imgs/oxford.jpg);
+}
+
+
+@media screen and (max-width: 900px) {
+    #about--me--page {
+        border-top: 170px solid transparent;
+    }
+    .city--container {
+        display: block;
+        margin: 0 0 10vh 0;
+    }
+    .city--description {
+        width: 100%;
+        position: relative;
+    }
+    .city--description > p {
+        margin-right: 0;
+        padding-bottom: 0;
+    }
+    #milan--description > p {
+        margin-left: 0;
+    }
+    .city--name {
+        --city-name-font-size: 40px;
+        --min-city-name-font-size: 10vw;
+        top: 10px;
+        width: max(calc(var(--min-city-name-font-size) * 6), calc(var(--city-name-font-size) * 6));
+        position: sticky;
+        z-index: 3;
+        border: 7px solid rgb(var(--content-color-600), 1);
+        background-color: rgb(var(--bg-color), 1);
+        padding: 5px;
+        margin: 0 auto;
+
+        transition: top var(--sidemenu-transition-len) var(--sidemenu-transition-curve), border var(--color-transition-len) ease, background-color var(--color-transition-len) ease;
+    }
+    .city--name--topbar--revealed {
+        top: calc(var(--top-bar-height) + 10px)
+    }
+    .city--name > h1 {
+        margin: 0;
+        writing-mode: horizontal-tb;
+        font-size: max(var(--min-city-name-font-size), var(--city-name-font-size));
+
+        letter-spacing: 0px;
+        height: auto;
+
+        -webkit-filter: grayscale(100%) brightness(150%);
+        filter: grayscale(100%) brightness(150%);
+    }
+
+
+    #durham--name > h1 {
+        background-image: url(imgs/durham_mobile.jpg);
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+    }
+    #milan--name > h1 {
+        background-image: url(imgs/milan_mobile.jpg);
+    }
+    #oxford--name > h1 {
+        background-image: url(imgs/oxford_mobile.jpg);
+    }
+}
+
+
+
+/* ##################################### */
+/* all the heights/tops are dynamically adjusted in js */
+/* this is probably not very efficient but idk another way to do it */
+/* since I need the dims of the previous div */
+
+
+.timeline--circle {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 3px solid rgba(var(--content-color-600), 1);
+    background-color: rgb(var(--bg-color), 1);
+    left: 60%;
+    z-index: 2;
+    transition: border var(--color-transition-len) ease, background-color var(--color-transition-len) ease;
+}
+.timeline--circle--in--focus {
+    border: 3px solid rgba(var(--accent-color), 1);
+}
+.timeline--circle > p {
+    position: relative;
+    top: -30px;
+    left: 20px;
+}
+
+#c1--move,
+#c1 {
+    top: -20px;
+}
+
+#c--mobile--start {
+    visibility: hidden;
+}
+
+#c2--move,
+#c2{
+    left: 40%;
+}
+
+#c2 > p {
+    left: -6em;
+}
+
+#c1,
+#c2,
+#c3,
+#c4 {
+    visibility: hidden;
+}
+#c1 > p,
+#c2 > p,
+#c3 > p,
+#c4 > p {
+    visibility: visible;
+}
+
+
+
+.timeline--line {
+    position: absolute;
+    background-color: rgb(var(--content-color-600), 1);
+}
+.timeline--stud {
+    height: 4px;
+    width: 16px;
+    position: absolute;
+    background-color: rgb(var(--content-color-600), 1);
+    margin-left: -8px;
+    left: 2px;
+}
+#l3 > .timeline--stud {
+    visibility: hidden;
+}
+#l5 > .timeline--stud {
+    top: 100%;
+}
+
+#l1,
+#l3,
+#l5 {
+    width: 4px;
+    margin-left: -2px
+}
+#l1 {
+    top: -10px;
+    left: calc(60% + 10px);
+}
+#l3 {
+    left: calc(40% + 10px);
+}
+#l5 {
+    left: calc(60% + 10px);
+}
+
+
+#l2,
+#l4 {
+    height: 4px;
+    left: calc(40% + 10px);
+    width: 20%;
+}
+
+@media screen and (max-width: 900px) {
+    #l1 {
+        height: 100px;
+        top: -130px;
+    }
+    #l2 {
+        left: 15px;
+        width: calc(60% - 5px);
+        top: calc(-30px - 4px);
+    }
+    #l3 {
+        top: calc(-30px - 4px);
+        left: 15px;
+        height: 100%;
+    }
+    #l3 > .timeline--stud--mobile {
+        top: 100%;
+        visibility: visible;
+    }
+    #l5,
+    #l4 {
+        visibility: hidden;
+    }
+
+    .timeline--circle > p {
+        top: -10px;
+        font-size: 10px;
+    }
+    .timeline--circle > p::first-letter {
+        font-size: 16px;
+    }
+    #c2 > p,
+    #c3 > p,
+    #c4 > p{
+        left: 20px;
+    }
+    
+    #c1--move,
+    #c1 {
+        top: -140px;
+        left: 60%;
+    }
+    #c--mobile--start {
+        top: -40px;
+        left: 5px;
+        visibility: visible;
+    }
+
+    #c4 {
+        bottom: 28px;
+    }
+
+    /* these tops are dynamically adjusted in js */
+    #c2--move,
+    #c3--move,
+    #c4--move {
+        visibility: hidden;
+    }
+    #c2,
+    #c3,
+    #c4 {
+        border: none;
+        border-radius: 0;
+        height: 4px;
+        width: 16px;
+        position: absolute;
+        background-color: rgb(var(--content-color-600), 1);
+        left: 7px;
+        visibility: visible;
+        z-index: 1;
+    }
+    #c4 {
+        visibility: hidden;
+    }
+    #c2 > p,
+    #c3 > p,
+    #c4 > p {
+        visibility: visible;
+        position: relative;
+    }
+}

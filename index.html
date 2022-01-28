@@ -2,30 +2,53 @@
 <html>
 
 <head>
+    <title>Michele Valotti</title>
+
+    <link rel='stylesheet' href='normalize.css'>
     <link rel='stylesheet' href='style.css'>
     <link rel='stylesheet' href='burger_style.css'>
     <link rel='stylesheet' href='topbar_content_style.css'>
     <link rel='stylesheet' href='side_menu_style.css'>
     <link rel='stylesheet' href='arrow_style.css'>
+    <link rel='stylesheet' href='about_me_style.css'>
+    <link rel='stylesheet' href='projects_style.css'>
+    <link rel='stylesheet' href='interests_stile.css'>
+    <link rel='stylesheet' href='footer_style.css'>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
-    <title>Welcome to my website!</title>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js"></script>
+    <script src="https://kit.fontawesome.com/5566f6038e.js" crossorigin="anonymous"></script>
+    <script src="Wordles.txt"></script>
+    <script src="five_letter_words_stanford.txt"></script>
+
 </head>
 
 <body>
 
     <div class='side--menu' id='side--menu'>
+        <div class="color--switch">
+            <div class="switch--button"></div>
+        </div>
         <div class="arrow--menu" id="arrow--menu">
             <span class="arrowbar" id="arrowbar1"></span>
             <span class="arrowbar" id="arrowbar2"></span>
             <span class="arrowbar" id="arrowbar3"></span>
         </div>
-        <div class='page--button', id='projects--page'><a ref='#'>PROJECTS</a></div>
-        <div class='page--button', id='blog--page'><a ref='#'>BLOG</a></div>
-        <div class='page--button', id='about--me--page'><a ref='#'>ABOUT ME</a></div>
-        <div class='page--button', id='contacts--page'><a ref='#'>CONTACTS</a></div>
+        <!-- hrefs to these are set in apps.js since they have to be delayed (wait for sidemenu to close) -->
+        <a class='page--button'>ABOUT ME</a>
+        <a class='page--button'>PROJECTS</a>
+        <a class='page--button'>INTERESTS</a>
+        <a class='page--button'>CONTACTS</a>
     </div>
 
-    <div class='main--body' id='main--body'>
+    <div class='main--body' id='main--body'>    
+        <div class="loader--page">
+            <h1>MICHELE<br>VALOTTI</h1>
+        </div>
+
+        <div id="top--bar--hover"></div>
+
         <div class='top--bar' id='top--bar'>
             <div class="burger--menu" id="burger--menu">
                 <span class="burgerbar" id="burgerbar1"></span>
@@ -33,19 +56,250 @@
                 <span class="burgerbar" id="burgerbar3"></span>
             </div>
             <div class="topbar--content" id="topbar--content">
-                SITE TITLE
             </div>
             <div class="logo" id="logo">
-                MY LOGO
+                <a href="#top">MICHELE<br>VALOTTI</a>
+            </div>
+            <div class="color--switch" id="top--bar--color--switch">
+                <div class="switch--button"></div>
             </div>
         </div>
-        <div class='content--page' id='content--page'>
-            <div class="content1">
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam aliquid ab repudiandae assumenda soluta voluptates veniam deleniti laboriosam! Assumenda atque modi quo doloribus omnis numquam.</p>
+
+        <div class="sidebar--page--counter">
+            <a class="page--dot" href="#about--me--page"></a>
+            <a class="page--dot" href="#projects--page"></a>
+            <a class="page--dot" href="#interests--page"></a>
+            <p id="page--name"></p>
+        </div>
+
+        <div id='banner--image'>
+            <h1 class="banner--name" id="banner--name">MICHELE<br>VALOTTI</h1>
+            <img src="imgs/my_kb_2_col_crop_compressed_scaled.jpg" alt="background picture" loading="lazy">
+        </div>
+
+        <div id="my--image--container">
+            <div id="my--image">
+                <img src="imgs/IMG_4744-1_crop_scaled.jpg" alt="picture of me" loading="lazy">
+                <a href="https://www.linkedin.com/in/michele-valotti-351215172/" target="_blank">
+                    <svg class="fab fa-linkedin-in"></svg>
+                </a>
+                <a href="https://github.com/michelevalotti" target="_blank">
+                    <svg class="fab fa-github"></svg>
+                </a>
+                <a href="./CV.pdf" target="_blank">
+                    <svg class="fas fa-address-card"></svg>
+                </a>
             </div>
-            <div class="content2">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, alias quis atque, doloremque ipsum molestiae illum accusantium ea nesciunt animi a quod velit asperiores provident?</p>
+        </div>
+
+        <div class='content--pages' id='content--pages'>
+            <div class="intro--div">
+                <div class="color--switch--container">
+                    <div class="color--switch" id="main--content--color--switch">
+                        <div class="switch--button"></div>
+                    </div>
+                </div>
+                <p id="job--title"><mark>Software Engineer and Data Scientist</p>
+                <p id="my--description"><mark>I work at <a href="https://www.oxfordbraindiagnostics.com/" target="_blank">Oxford Brain Diagnostics</a> alongside a team of researchers on patented software technology to help early diagnosis of Alzheimer's Disease.</mark></p>
             </div>
+
+            <div class="content--paragraph" id="about--me--page">
+                <!-- timeline of my endeaevouears -->
+                <div class="timeline--container">
+                    <span class="timeline--circle" id="c1"><p>SEP_2015</p></span>
+                    <span class="timeline--circle" id="c1--move"></span>
+                    <span class="timeline--line" id="l1">
+                        <span class="timeline--stud"></span>
+                    </span>
+                    <span class="timeline--circle" id="c--mobile--start"></span>
+                    <span class="timeline--circle" id="c2"><p>NOV_2019</p></span>
+                    <span class="timeline--circle" id="c2--move"></span>
+                    <span class="timeline--line" id="l2"></span>
+                    <span class="timeline--line" id="l3">
+                        <span class="timeline--stud timeline--stud--mobile"></span>
+                    </span>
+                    <span class="timeline--line" id="l4"></span>
+                    <span class="timeline--circle" id="c3"><p>MAR_2020</p></span>
+                    <span class="timeline--circle" id="c3--move"></span>
+                    <span class="timeline--line" id="l5">
+                        <span class="timeline--stud"></span>
+                    </span>
+                    <span class="timeline--circle" id="c4"><p>TODAY</p></span>
+                </div>
+                <div class="city--container">
+                    <div class="city--name" id="durham--name">
+                        <h1 id="durham"></h1>
+                    </div>
+                    <div class="city--description", id="durham--description">
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos dolores quisquam exercitationem adipisci magni fugiat cumque quas. Temporibus facere, beatae est exercitationem voluptatum maiores repudiandae nesciunt quisquam explicabo id magnam sequi iste quaerat deleniti nostrum earum mollitia quibusdam molestias laboriosam? Itaque ipsum, autem recusandae corporis placeat ipsam provident beatae? Cupiditate!</p>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos dolores quisquam exercitationem adipisci magni fugiat cumque quas. Temporibus facere, beatae est exercitationem voluptatum maiores repudiandae nesciunt quisquam explicabo id magnam sequi iste quaerat deleniti nostrum earum mollitia quibusdam molestias laboriosam? Itaque ipsum, autem recusandae corporis placeat ipsam provident beatae? Cupiditate!</p>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos dolores quisquam exercitationem adipisci magni fugiat cumque quas. Temporibus facere, beatae est exercitationem voluptatum maiores repudiandae nesciunt quisquam explicabo id magnam sequi iste quaerat deleniti nostrum earum mollitia quibusdam molestias laboriosam? Itaque ipsum, autem recusandae corporis placeat ipsam provident beatae? Cupiditate!</p>
+                    </div>
+                </div>
+                <div class="city--container">
+                    <div class="city--name" id="milan--name">
+                        <h1 id="milan"></h1>  <!-- city h1's text is added in js -->
+                    </div>
+                    <div class="city--description", id="milan--description">
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem ratione dolor alias consectetur nisi quos nam quis minus non, iure sed quam facilis facere esse similique eum doloribus explicabo quaerat blanditiis dolore, perferendis ullam! Eum quibusdam corporis provident, tempore eveniet dicta, est, alias expedita soluta consectetur repellendus adipisci id quo ad exercitationem maiores! Ipsam iure veniam unde assumenda eos doloremque a officia molestias? Numquam odio, laudantium quam voluptate pariatur dolorem. Labore, minus doloribus perferendis cumque rem reiciendis suscipit, quasi eligendi exercitationem nulla at corporis provident optio harum sapiente quis. Illum eligendi autem rem numquam iusto vero dolorem odio. Optio dolorem ad consequatur qui, similique nesciunt praesentium cum hic quasi dicta libero, minus fugiat! Nihil assumenda dicta debitis eaque harum saepe officia pariatur ut nam corporis? Fugiat voluptates vel accusantium tenetur illo consectetur, iure culpa, accusamus nam illum minus quas in consequuntur placeat. Fugit excepturi quod nesciunt nulla facilis enim. Explicabo ipsum odio totam veniam accusantium libero deleniti minima expedita minus accusamus cumque numquam obcaecati nesciunt eos omnis impedit vel, mollitia ea quibusdam aliquid adipisci nemo. Repellat quod temporibus iste, facilis recusandae delectus debitis minus obcaecati vero tenetur sapiente enim a quae similique ad reprehenderit officiis animi officia ab magnam amet!</p>
+                    </div>
+                </div>
+                <div class="city--container">
+                    <div class="city--name" id="oxford--name">
+                        <h1 id="oxford"></h1>
+                    </div>
+                    <div class="city--description", id="oxford--description">
+                        <p>MY ABOUT ME. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita veritatis alias, aut eveniet similique incidunt deleniti repellendus quam nostrum sunt quia, magni quod aliquid fugiat veniam ab suscipit unde nemo esse voluptatem rem repudiandae quaerat. Nesciunt, quasi repellat. Ullam similique dolore nesciunt molestias unde consequatur corrupti repudiandae. Voluptatem harum velit ipsam facilis molestiae vero vitae modi culpa. Optio, non omnis.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="content--paragraph" id="projects--page">
+                <!-- these will have "cards" for each project opening a curtain menu below them -->
+                <span class="disappear--under"></span>
+                <h2>MY PROJECTS</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia aspernatur odit id cumque sequi cupiditate veritatis voluptatum corporis beatae quidem illum, mollitia quam accusamus ab repellat, delectus nostrum iure dolores similique. Tempore blanditiis consectetur asperiores maiores, delectus odit doloremque soluta, non perferendis voluptatum quis unde ex adipisci, similique voluptatem dignissimos!</p>
+                <div id="projects--container">
+
+                    <div class="card--container">
+                        <div class="project--card" id="qubits--card">
+                            <div class="background--gradient">
+                                <span class="project--card--line"></span>
+                                <h2 class="project--card--title"><mark>QUANTUM</mark><br><mark>ERROR</mark><br><mark>CORRECTION</mark></h2>
+                            </div>
+                        </div>
+                        <div class="project--explanation">
+                            <div class="explanation--content">
+                                <div class="coming--soon--banner"><h2>COMING<br>SOON<span class='dot-1 dot'>.</span><span class='dot-2 dot'>.</span><span class='dot-3 dot'>.</span></h2></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card--container">
+                        <div class="project--card" id="ssvep--robot--card">
+                            <div class="background--gradient">
+                                <span class="project--card--line"></span>
+                                <h2 class="project--card--title"><mark>SSVEP</mark><br><mark>BCI</mark><br><mark>ROBOT</mark></h2>
+                            </div>
+                        </div>
+                        <div class="project--explanation">
+                            <div class="explanation--content">
+                                <div class="coming--soon--banner"><h2>COMING<br>SOON<span class='dot-1 dot'>.</span><span class='dot-2 dot'>.</span><span class='dot-3 dot'>.</span></h2></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card--container">
+                        <div class="project--card" id="quantum--dynamics--card">
+                            <div class="background--gradient">
+                                <span class="project--card--line"></span>
+                                <h2 class="project--card--title"><mark>QUANTUM</mark><br><mark>DYNAMICS</mark><br><mark>ON GRAPHS</mark></h2>
+                            </div>
+                        </div>
+                        <div class="project--explanation">
+                            <div class="explanation--content">
+                                <div class="coming--soon--banner"><h2>COMING<br>SOON<span class='dot-1 dot'>.</span><span class='dot-2 dot'>.</span><span class='dot-3 dot'>.</span></h2></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card--container">
+                        <div class="project--card" id="game--of--life--card">
+                            <div class="background--gradient">
+                                <span class="project--card--line"></span>
+                                <h2 class="project--card--title"><mark>GAME</mark><br><mark>OF</mark><br><mark>LIFE</mark></h2>
+                            </div>
+                        </div>
+                        <div class="project--explanation">
+                            <div class="explanation--content">
+                                <div class="coming--soon--banner"><h2>COMING<br>SOON<span class='dot-1 dot'>.</span><span class='dot-2 dot'>.</span><span class='dot-3 dot'>.</span></h2></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card--container">
+                        <div class="project--card" id="boids--card">
+                            <div class="background--gradient">
+                                <span class="project--card--line"></span>
+                                <h2 class="project--card--title"><mark>BOIDS</mark></h2>
+                            </div>
+                        </div>
+                        <div class="project--explanation">
+                            <div class="explanation--content">
+                                <div class="coming--soon--banner"><h2>COMING<br>SOON<span class='dot-1 dot'>.</span><span class='dot-2 dot'>.</span><span class='dot-3 dot'>.</span></h2></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card--container">
+                        <div class="project--card" id="wordle--card">
+                            <div class="background--gradient">
+                                <span class="project--card--line"></span>
+                                <h2 class="project--card--title"><mark>NERDLE</mark></h2>
+                            </div>
+                        </div>
+                        <div class="project--explanation">
+                            <div class="explanation--content" id="wordle--content">
+                                <p class="explanation--paragraph">TEST wordle clone Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem accusamus non, totam, itaque et similique tempora natus dicta eveniet dolores nihil voluptas dolore quas? Officiis?</p>
+                                <div id="wordle--clone--container">
+                                    <div id="game--board"><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span><span class="board--tile"></span></div>
+                                    <div id="letter--list"><span class="letter">A</span><span class="letter">B</span><span class="letter">C</span><span class="letter">D</span><span class="letter">E</span><span class="letter">F</span><span class="letter">G</span><span class="letter">H</span><span class="letter">I</span><span class="letter">J</span><span class="letter">K</span><span class="letter">L</span><span class="letter">M</span><span class="letter">N</span><span class="letter">O</span><span class="letter">P</span><span class="letter">Q</span><span class="letter">R</span><span class="letter">S</span><span class="letter">T</span><span class="letter">U</span><span class="letter">V</span><span class="letter">W</span><span class="letter">X</span><span class="letter">Y</span><span class="letter">Z</span><span class="letter" id="enter">ENTER</span><span class="letter" id="backspace">BACKSPACE</span></div>
+                                </div>
+                                <div class="endscreen">
+                                    <p id="wordle--solution"></p>
+                                    <p id="solution--message"></p>
+                                    <div class="reset--arrow"><svg class="fas fa-redo"></svg></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="content--paragraph" id="interests--page">
+                <h2>MY INTERESTS</h2>
+                <p id="interests--intro">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, alias quis atque, doloremque ipsum molestiae illum accusantium ea nesciunt animi a quod velit asperiores provident?</p>
+                <div id="bubble--esc"><span class="esc--corner esc--clicked" id="tl"></span><span class="esc--corner esc--clicked" id="tr"></span><span class="esc--corner esc--clicked" id="bl"></span><span class="esc--corner esc--clicked" id="br"></span></div>
+                <div class="bubble" id="bubble-1"><h2>1</h2></div>
+                <div class="bubble" id="bubble-2"><h2>2</h2></div>
+                <div class="bubble" id="bubble-3"><h2>3</h2></div>
+                <div class="bubble" id="bubble-4"><h2>4</h2></div>
+                <div class="bubble" id="bubble-5"><h2>5</h2></div>
+                <div class="bubble" id="bubble-6"><h2>6</h2></div>
+                <div class="bubble--move"></div>
+                <!-- id needs to be "paragrah--" + its bubble id -->
+                <p class="paragraph--bubble" id="paragraph--bubble-1">1Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic deserunt veritatis inventore ex asperiores sequi necessitatibus voluptas pariatur porro accusamus architecto assumenda molestiae fuga ea, repellendus eaque amet illo repudiandae exercitationem totam aliquid dolor placeat! Omnis nulla suscipit ducimus totam neque asperiores explicabo mollitia vitae, fuga rerum reprehenderit non, delectus architecto nobis aperiam dolor perferendis id fugiat. Non doloribus pariatur, unde aperiam exercitationem reprehenderit eligendi quidem distinctio eos quam harum perferendis, adipisci fugit. Deleniti excepturi voluptas, labore vitae sint aliquam maiores! Mollitia quaerat iure soluta officiis sed labore, in reiciendis illo, nulla, earum cumque nostrum perspiciatis adipisci blanditiis illum molestiae.</p>
+                <p class="paragraph--bubble" id="paragraph--bubble-2">2Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus dolorem nisi fugiat error similique cupiditate eos placeat, suscipit qui, tempora laboriosam! Ut placeat et ipsa?</p>
+                <p class="paragraph--bubble" id="paragraph--bubble-3">3Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus dolorem nisi fugiat error similique cupiditate eos placeat, suscipit qui, tempora laboriosam! Ut placeat et ipsa?</p>
+                <p class="paragraph--bubble" id="paragraph--bubble-4">4Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus dolorem nisi fugiat error similique cupiditate eos placeat, suscipit qui, tempora laboriosam! Ut placeat et ipsa?</p>
+                <p class="paragraph--bubble" id="paragraph--bubble-5">5Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus dolorem nisi fugiat error similique cupiditate eos placeat, suscipit qui, tempora laboriosam! Ut placeat et ipsa?</p>
+                <p class="paragraph--bubble" id="paragraph--bubble-6">6Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus dolorem nisi fugiat error similique cupiditate eos placeat, suscipit qui, tempora laboriosam! Ut placeat et ipsa?</p>
+
+                <span class="connector--line"></span><span class="connector--line"></span><span class="connector--line"></span><span class="connector--line"></span><span class="connector--line"></span><span class="connector--line"></span><span class="connector--line"></span><span class="connector--line"></span><span class="connector--line"></span><span class="connector--line"></span>
+            </div>
+
+            <footer id='contact--page'>
+                <div class="footer--links">
+                    <div>
+                        <a href="https://www.linkedin.com/in/michele-valotti-351215172/" target="_blank">
+                            LinkedIn<span></span><svg class="fab fa-linkedin-in footer--icon"></svg>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="https://github.com/michelevalotti" target="_blank">
+                            GitHub<span></span><svg class="fab fa-github footer--icon"></svg>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="./CV.pdf" target="_blank">
+                            Download CV<span></span><svg class="fas fa-address-card footer--icon"></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer--name">
+                    <p>Michele Valotti</p>
+                    <p>Software Engineer and Data Scientist</p>
+                </div>
+            </footer>
         </div>
     </div>
 

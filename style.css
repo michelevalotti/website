@@ -1,70 +1,346 @@
 :root {
     --side-menu-width: 200px;
     --top-bar-height: 60px;
+    --banner-image-height: 700px;
 
-    --dark-bg-color: #194769;  /* dark blue */
-    --light-color-1: #d7eef2;  /* light blue */
-    --light-color-2: #f6f6e9;  /* cream */
-    --accent-color: #f2855e;  /* orange */
+    /* rgb values let me set opacity */
+
+    /* --bg-color: 33, 33, 33;
+    --content-color-600: 97, 97, 97;
+    --content-color-400: 189, 189, 189; */
+
+    --bg-color: 210, 210, 210;
+    --content-color-600: 140, 140, 140;
+    --content-color-400: 60, 60, 60;
+
+    --accent-color: 242, 133, 94;
 
     --sidemenu-transition-len: 0.3s;
+    --sidemenu-transition-delay: 0.3s;
     --sidemenu-transition-curve: ease-out;
+
+    --color-transition-len: 0.2s;
 }
 
+
+
+html {
+    scroll-behavior: smooth;
+    /* this works ok but kinda messes up if the div above the linked one chnages in height
+    e.g. some words move to the next line when the side menu opens,
+    should still be fine with larger padding, even if the div will move up a smudge */
+    scroll-padding-top: var(--top-bar-height);
+}
+
+
+*::before,
+*::after,
 * {
     margin: 0;
     box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     font-family: 'Avantgarde', 'TeX Gyre Adventor', 'URW Gothic L', sans-serif;
+    /* a lot of accent colors will not have this, just don't change --accent-color and everything will be ok*/
+    transition: background-color var(--color-transition-len) ease, color var(--color-transition-len) ease;
 }
+
+mark {
+    color: rgb(var(--content-color-400), 1);
+    background-color: rgb(var(--content-color-600), 1);
+    padding: 1px;
+}
+
+p, h1, h2, a {
+    /* chrome and safari have a weird transition delay if the property that is being transitioned is inherited */
+    color: rgb(var(--content-color-400), 1);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.loader--page {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(var(--content-color-400), 1);
+    opacity: 1;
+    visibility: visible;
+    z-index: 1000;
+
+    transition: opacity 1s linear, visibility 1s linear;
+}
+.loader--page > h1 {
+    color: rgb(var(--bg-color), 1);
+    position: fixed;
+    top: 20vh;
+    left: 45vw;
+    font-size: min(5vw, 70px);
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+}
+.page--loaded {
+    opacity: 0;
+    visibility: hidden;
+}
+
 
 #side--menu {
     position: fixed;
     height: 100vh;
-    z-index: 10;
+    z-index: 20;
 }
 .side--menu {
-    background-color: var(--light-color-1);
+    background-color: rgb(var(--content-color-600), 1);
     width: var(--side-menu-width);
     left: calc(var(--side-menu-width) * -1);
 
-    transition-property: all;
+    transition-property: width, left, background-color;
     transition-timing-function: var(--sidemenu-transition-curve);
     transition-duration: var(--sidemenu-transition-len);
 }
 
 #main--body{
     position: relative;
+
 }
 .main--body {
     left: 0;
 
-    transition-property: all;
+    transition-property: left, margin-right;
     transition-timing-function: var(--sidemenu-transition-curve);
     transition-duration: var(--sidemenu-transition-len);
 }
+
+/* ########################## */
 
 .top--bar {
     height: var(--top-bar-height);
     width: 100%;
     position: fixed;
+    top: 0;
     right: 0;
 
-    background-color: var(--light-color-2);
+    background-color: rgba(0,0,0,0);
 
-    transition-property: all;
+    transition-property: left, width, margin-left, background-color, top;
     transition-timing-function: var(--sidemenu-transition-curve);
     transition-duration: var(--sidemenu-transition-len);
+
+    z-index: 8;
+
+    display: flex;
+    align-content: center;
+}
+
+.top--bar--hide {
+    top: calc(var(--top-bar-height) * -1)
+}
+
+#top--bar--hover {
+    width: 100%;
+    height: var(--top-bar-height);
+    position: fixed;
+    opacity: 0;
+    z-index: 4;
+    /* can't hover on mobile so this would just prevent tapping on top bit of screen */
+    visibility: hidden;
+}
+@media (hover:hover) {
+    #top--bar--hover {
+        /* make hoverable if can hover */
+        visibility: visible;
+    }
+}
+
+/* ########################## */
+
+#banner--image {
+    position: relative;
+    width: 100%;
+    height: var(--banner-image-height);
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+#banner--image > img {
+    -webkit-filter: none;
+    filter: none;
+    position: absolute;
+    object-fit: cover;
+}
+
+.logo--link {
+    object-fit: contain;
+    color: rgb(var(--content-color-400), 1);
 }
 
 
-.content--page {
-    background-color: var(--dark-bg-color);
-    padding-top: calc(var(--top-bar-height) + 15px);
-    padding-left: 15px;
-    padding-right: 15px;
+#my--image--container {
+    position: absolute;
+    height: 280px;
+    width: 100%;
+    top: calc(var(--banner-image-height) - 110px);
+
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+
+#my--image > a {
+    color: transparent;
+    display: inline-block;
+    position: relative;
+    width: 18%;
+    height: 13%;
+    margin: 1em 0.5em 0 0.5em;
+}
+
+#my--image > a > svg {
+    color: rgb(var(--content-color-400), 1);
+    font-size: 20px;
+}
+
+#my--image {
+    position: absolute;
+    border: 2px solid rgba(var(--accent-color), 1);;
+    width: 200px;
+    height: 280px;
+
+    padding: 15px;
+    padding-bottom: 4em;
+    background-color: rgba(0,0,0,0);
+    text-align: center;
+
+    right: 80px;
+
+    z-index: 3;
+}
+
+.banner--name {
+    position: absolute;
+    top: calc(var(--banner-image-height) - 153px);
+    /* need to be set for auto margin to work */
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+
+    padding-left: 50px;
+    font-size: 85px;
+    color: rgba(var(--accent-color), 1);;
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+
+    white-space: pre-line;  /* so I can add linebreakes as \n */
+}
+
+.stacked--banner--h1 {
+    line-height: 0.9;
+    top: calc(var(--banner-image-height) - 250px)
+}
+
+
+/* ########################## */
+
+.content--pages {
+    position: relative;
+    background-color: rgb(var(--bg-color), 1);
+    padding: 0;
     width: 100%;
 
-    color: var(--light-color-2);
+    color: rgb(var(--content-color-400), 1);
+}
+
+.content--paragraph {
+    position: relative;
+    padding: 30px;
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto 100px auto;
+    border-top: 2px solid rgba(var(--accent-color), 1);;
+}
+
+.intro--div {
+    height: auto;
+    padding: 250px 30px 100px 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.intro--div > .color--switch--container {
+    position: absolute;
+    width: 100%;
+    top: 170px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+.intro--div > .color--switch--container > .color--switch {
+    visibility: visible;
+    position: absolute;
+    transform: rotate(-90deg);
+    right: calc(80px + 100px - calc(calc(var(--top-bar-height) - 24px)/2));
+
+}
+.picture--color--switch--disappear{
+    visibility: hidden !important;
+    opacity: 0 !important;
+    /* we also need to rotate because we need to conserve that rotation */
+    transform: translateX(70px) rotate(-90deg) !important;
+}
+
+#job--title {
+    font-family: 'Courier New', monospace;
+
+    position: absolute;
+    display: inline-block;
+    font-size: 15px;
+    top: 120px;
+    text-align: left;
+
+    width: 100%;
+    padding-left: 80px;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    max-width: 1200px;
+    white-space: pre-line;
+}
+#my--description {
+    position: relative;
+    text-align: right;
+
+    width: 100%;
+    padding: 0 50px;
+    max-width: 800px
+}
+
+#my--description > mark {
+    font-family: 'Courier New', monospace;
+}
+
+#my--description > mark > a {
+    all: inherit;
+    cursor: pointer;
+    color: rgb(var(--bg-color), 1);
+    text-decoration: underline; 
+}
+
+
+p {
+    line-height: 2em;
+    text-align: left;
+    font-size: 15px;
 }
 
 p::first-letter {
@@ -72,14 +348,63 @@ p::first-letter {
     font-size: 24px;
     font-weight: bold;
     font-family: 'Segoe UI', sans-serif;
-    letter-spacing: 3px;
-    color: var(--accent-color);
+    color: rgba(var(--accent-color), 1);;
 }
 
-.content2 {
-    height: 1400px;
+
+
+
+/* ########################## */
+
+.sidebar--page--counter {
+    position: fixed;
+    top: 40vh;
+    right: 20px;
+    z-index: 10;
 }
 
+.sidebar--page--counter > a {
+    display: block;
+    position: relative;
+    border-radius: 50%;
+    height: 15px;
+    width: 15px;
+    background-color: rgb(var(--content-color-400), 1);
+    opacity: 0.5;
+    margin-bottom: 20px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+
+    transition: opacity 0.2s ease, border 0.2s ease, background-color var(--color-transition-len) ease;
+}
+
+/* for scrolling */
+.sidebar--page--counter > a.counter--in--focus {
+    border: 2px solid rgba(var(--accent-color), 1);;
+    opacity: 1;
+}
+
+/* so that we don't remove the highlight after scrolling */
+.sidebar--page--counter > a:hover {
+    border: 2px solid rgba(var(--accent-color), 1);;
+}
+
+
+#page--name {
+    font-size: 15px;
+    writing-mode: vertical-rl;
+    width: 22px;
+    margin-top: 50px;
+    color: rgb(var(--content-color-400), 1);
+}
+
+#page--name::first-letter {
+    all: inherit;
+    margin-top: 0;
+}
+
+
+/* ########################## */
 
 /* classes for side menu clicks */
 
@@ -99,9 +424,73 @@ p::first-letter {
 
 .side--menu--shift--side--menu {
     left:0;
+    transition-delay: 0s;
 }
 
 .side--menu--overflow {
     left:0;
     width: 100vw;
+    overflow-y: auto;
+}
+
+
+
+
+@media screen and (max-width: 900px) {
+    /* when sidemenu fills the screen do not delay animation */
+    :root {
+        --sidemenu-transition-delay: 0s;
+    }
+    #my--image {
+        left: 5%;
+    }
+    .banner--name {
+        top: calc(var(--banner-image-height) - 310px);
+        text-align: right;
+        padding-right: 10%;
+        font-size: 60px;
+    }
+    #job--title {
+        text-align: right;
+        font-size: 12px;
+        top: 80px;
+        width: auto;
+        padding: 0 15% 0 3px;
+        margin-right: 0;
+        margin-left: calc(5% + 200px);
+    }
+    .sidebar--page--counter {
+        right: 10px;
+    }
+    .intro--div {
+        padding: 250px 30px 100px 30px;
+    }
+    p {
+        line-height: 1.5em;
+        font-size: 12px;
+    }
+    p::first-letter {
+        font-size: 16px;
+    }
+    .intro--div > .color--switch--container > .color--switch {
+        /* position in the middle of my--picture */
+        left: calc(5% + 100px - calc(calc(var(--top-bar-height) - 24px))/2);
+        opacity: 1;
+    }
+    .picture--color--switch--disappear{
+        /* I know !important is bad but it's also easier */
+        visibility: hidden !important;
+        opacity: 0 !important;
+        transform: translateX(-70px) rotate(-90deg) !important;
+    }
+}
+
+
+@media screen and (max-height: 500px) {
+    .sidebar--page--counter {
+        top: 25vh;
+    }
+    #page--name {
+        margin-top: 0;
+    }
 }

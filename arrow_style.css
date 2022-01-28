@@ -1,4 +1,5 @@
 .arrow--menu {
+    display: inline-block;
     position: absolute;
     cursor: pointer;
     margin: 20px;
@@ -6,13 +7,17 @@
     height: 24px;
     width: 30px;
     right: 0;
+    padding-right: 0;
 
-    transition: all 0.1s ease-out;
+    transition: padding-right 0.1s ease-out, width 0.1s ease-out;
     transition-delay: 0;
 }
 
-.arrow--menu--hover {
-    right: 5px;
+@media (hover:hover) {
+    .arrow--menu--hover {
+        padding-right: 5px;
+        width: 35px;
+    }
 }
 
 .arrowbar {
@@ -22,13 +27,13 @@
     width: 30px;
     height: 4px;
     margin-bottom: 6px;
-    background-color: var(--accent-color);
+    background-color: rgba(var(--accent-color), 1);;
     border-radius: 4px;
 
     opacity: 0;
 
-    transition: all 0.3s ease-out;
-    transition-delay: 0.2s;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out, width 0.3s ease-out;
+    transition-delay: 0.3s;
 }
 
 .arrowbar1--clicked {

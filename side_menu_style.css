@@ -1,3 +1,4 @@
+
 .page--button {
     width: 150px;
     display: block;
@@ -5,24 +6,45 @@
     padding: 10px 20px;
     margin: 20px 10px;
     border-radius: 30px;
-    color: var(--dark-bg-color);
+    color: rgb(var(--bg-color), 1);
     cursor: pointer;
     font-size: 20px;
     left: 0;
 
-    transition: all 0.2s linear;
+    text-decoration: none;
+
+    transition: color 0.2s linear, background-color 0.2s linear, left 0.2s linear;
 }
 
-.page--button + a {
-    width: 100%;
-}
 
-#projects--page{
-    margin-top: 100px;
-}
-
-.page--button:hover {
-    color: var(--accent-color);
-    background-color: var(--dark-bg-color);
+/* this should be "tap" on mobile */
+.page--button:active {
+    color: rgba(var(--accent-color), 1);;
+    background-color: rgb(var(--bg-color), 1);
     left: 10px;
+}
+
+.side--menu > .color--switch {
+    visibility: hidden;
+    display: inline-block;
+    position: relative;
+    opacity: 1;
+    top: 10px;
+    left: 30px;
+    transform: rotate(-90deg);
+    background-color: rgb(var(--content-color-400), 1);
+}
+
+@media screen and (max-width: 900px) {
+    .side--menu > .color--switch {
+        visibility: visible;
+    }
+}
+
+@media (hover: hover) {
+    .page--button:hover {
+        color: rgba(var(--accent-color), 1);;
+        background-color: rgb(var(--bg-color), 1);
+        left: 10px;
+    }
 }
