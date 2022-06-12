@@ -13,7 +13,7 @@
     transition-delay: 0;
 }
 
-@media (hover:hover) {
+@media (hover: hover) {
     .arrow--menu--hover {
         padding-right: 5px;
         width: 35px;

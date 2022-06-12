@@ -148,7 +148,7 @@ a {
     /* can't hover on mobile so this would just prevent tapping on top bit of screen */
     visibility: hidden;
 }
-@media (hover:hover) {
+@media (hover: hover) {
     #top--bar--hover {
         /* make hoverable if can hover */
         visibility: visible;
