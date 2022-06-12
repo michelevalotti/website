@@ -42,6 +42,10 @@ html {
     font-family: 'Avantgarde', 'TeX Gyre Adventor', 'URW Gothic L', sans-serif;
     /* a lot of accent colors will not have this, just don't change --accent-color and everything will be ok*/
     transition: background-color var(--color-transition-len) ease, color var(--color-transition-len) ease;
+    /* remove highlight on tap */
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent; /* For some Androids */
+    outline: 0; 
 }
 
 mark {
