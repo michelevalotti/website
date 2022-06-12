@@ -713,13 +713,6 @@ function adjustInterestsBubblesPositions() {
     var containerHeightTotal = topStart + ((bubbleHeight+bubbleGap)*bubbles.length);
     container.style.height = containerHeightTotal + "px";
 
-    // default values for movebubble, the position is changed on hover over other bubbles
-    moveBubble = document.getElementsByClassName("bubble--move")[0];
-    moveBubble.style.transition = "none";  // reset to css defined property on click of bubble or x
-    moveBubble.style.height = window.getComputedStyle(bubbles[0]).getPropertyValue('width');
-    moveBubble.style.top = previouslyClickedBubble.style.top;
-    moveBubble.style.left = previouslyClickedBubble.style.left;
-
     var leftPerc = [0.2, 0.7, 0.5, 0.1, 0.7, 0.3];
     for (var i=0; i<bubbles.length; i++) {
         bubble = bubbles[i];
@@ -734,6 +727,12 @@ function adjustInterestsBubblesPositions() {
         bubble.getElementsByTagName('h2')[0].style.fontSize = parseInt(bubble.style.height)/7 + "px";
     }
 
+    // default values for movebubble, the position is changed on hover over other bubbles
+    moveBubble = document.getElementsByClassName("bubble--move")[0];
+    moveBubble.style.transition = "none";  // reset to css defined property on click of bubble or x
+    moveBubble.style.height = window.getComputedStyle(bubbles[0]).getPropertyValue('width');
+    moveBubble.style.top = previouslyClickedBubble.style.top;
+    moveBubble.style.left = previouslyClickedBubble.style.left;
 
 }
 
