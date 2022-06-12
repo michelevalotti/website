@@ -30,6 +30,8 @@ let scrollbarWidth = window.innerWidth - document.body.clientWidth;
 // initiate for scroll up/down detection
 var lastScrollY = window.pageYOffset;
 var lastWidth = width;
+var lastHeight = height;
+var isLoaded = false;
 
 const pageClickDelay = 300;
 
@@ -41,7 +43,7 @@ var previouslyClickedBubble = document.getElementsByClassName("bubble")[0];  // 
 
 window.onload = onLoadFunction();
 
-onResizeFunction();
+onResizeFunction(first_call=true);
 window.onresize = onResizeFunction;
 
 onScrollFunction();
@@ -825,6 +827,7 @@ function onLoadFunction() {
     setTimeout(function() {loadPage.classList.add("page--loaded")}, 500);
 
     onScrollFunction();
+    isLoaded = true;
 }
 
 function onScrollFunction() {
@@ -844,7 +847,8 @@ function onScrollFunction() {
     lastScrollY = window.pageYOffset;
 }
 
-function onResizeFunction() {
+function onResizeFunction(first_call=false) {
+    // this is called: 1) on load 2) whenever window size changes 3) when side menu is opened and not in mobile (i.e. when main body is resized)
 
     height = window.innerHeight;
     width = window.innerWidth;
@@ -902,6 +906,7 @@ function onResizeFunction() {
     adjustBubbleLinesPositions();  // needs to be called after adjusting bubbles posns
 
     lastWidth = width;
+    lastHeight = height;
 }
 
 
