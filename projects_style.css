@@ -214,27 +214,24 @@
 
 
 #wordle--content {
-    display: flex;
-    align-items: stretch;
-    flex-direction: column;
+    display: grid;
+    grid-template-areas:
+        'text text'
+        'board letters'
 }
-
-#wordle--clone--container {
-    position: relative;
-    display: flex;
-    place-items: center;
-    flex-direction: row;
-    height: 100%;
+#wordle--content > p {
+    grid-area: text;
 }
 
 #letter--list {
+    grid-area: letters;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(35px, 1fr));
-    grid-template-rows: repeat(auto-fit, minmax(45px, 1fr));
     column-gap: 5px;
     row-gap: 5px;
     width: max(230px, 80%);
     margin-right: 50px;
+    place-self: center;
 }
 span.letter {
     border: 1px solid rgba(var(--content-color-600), 1);
@@ -258,10 +255,12 @@ span.letter {
 }
 
 #game--board {
+    grid-area: board;
     display: grid;
     grid-template-columns: repeat(5, 45px);
     grid-template-rows: repeat(6, 45px);
     justify-content: center;
+    place-self: center;
     width: max(230px, 80%);
     margin: 10% 0;
 }
@@ -276,6 +275,7 @@ span.letter {
 }
 
 .endscreen {
+    grid-area: letters;
     position: absolute;
     height: 100%;
     width: 100%;
@@ -313,18 +313,14 @@ span.letter {
 }
 
 .reset--arrow {
-    margin-top: 20px;
-    width: 100px;
-    height: 100px;
+    margin-top: 40px;
     transition: transform 0.2s linear;
-}
-.reset--arrow > svg {
     position: relative;
     display: inline-block;
     font-size: 60px;
-    top: 20px;
-    left: 20px;
+    top: 0;
     color: rgb(var(--accent-color), 1);
+    transform-origin: center;
 }
 .reset--arrow--hover {
     transform: rotate(30deg);
@@ -335,8 +331,11 @@ span.letter {
 
 
 @media screen and (max-width: 900px) {
-    #wordle--clone--container {
-        flex-direction: column;
+    #wordle--content {
+        grid-template-areas:
+        'text'
+        'board'
+        'letters'
     }
     #letter--list {
         margin-right: 0;
