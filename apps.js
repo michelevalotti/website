@@ -22,9 +22,9 @@ let height = window.innerHeight;
 let width = window.innerWidth;  // this includes the scrollbar width
 // let width = document.body.clientWidth;  // this doesn't
 
-const minWidth = 900;
+const minWidth = 901;
 const minHeight = 500;
-let isMobile = (height < minHeight) || (width < minWidth);
+let isMobile = width < minWidth;
 let scrollbarWidth = window.innerWidth - document.body.clientWidth;
 
 // initiate for scroll up/down detection
@@ -41,12 +41,9 @@ var previouslyClickedBubble = document.getElementsByClassName("bubble")[0];  // 
 ///////////////////////////////////////////////////////////////////////////
 
 
-window.onload = onLoadFunction();
 
-onResizeFunction(first_call=true);
+window.onload = onLoadFunction;
 window.onresize = onResizeFunction;
-
-onScrollFunction();
 window.onscroll = onScrollFunction;
 
 
@@ -105,8 +102,10 @@ document.getElementById("top--bar--hover").addEventListener("mouseover", revealT
 
 const cityContainer = document.getElementsByClassName("city--container")[0];
 const ro = new ResizeObserver(entries => {
-    onResizeFunction();
-    onScrollFunction();  // need to have this here because body resizes with an animation delay
+    if (document.getElementById("side--menu").getBoundingClientRect().left > -200) {  // only call this when opening sidemenu, NOT when whole window is resized
+        onResizeFunction();
+        onScrollFunction();  // need to have this here because body resizes with an animation delay
+    }
   });
 // only need to observe one container since the function adjusts for all
 ro.observe(cityContainer);
@@ -129,19 +128,15 @@ document.getElementsByClassName("reset--arrow")[0].addEventListener("click", fun
         resetWordle();
     });
 
+document.getElementById('wordle--content').addEventListener('click', activateWordleClone);
 document.getElementById('wordle--card').addEventListener('click', function() {
-    if (gameBoardIsActive) {
-        gameBoardIsActive = false;
-        document.removeEventListener('keydown', wordleOnKeyPress, true);
+    if (document.getElementById('wordle--card').dataset.clicked === 'false') {
+        deactivateWordleClone();
     }
     else {
-        gameBoardIsActive = true;
-        document.addEventListener('keydown', wordleOnKeyPress, true);
-        for (let lt of letterTiles) {
-            lt.addEventListener('click', wordleOnKeyPress, true);
-        }
+        activateWordleClone();
     }
-})
+});
 
 for (let bubble of document.getElementsByClassName("bubble")) {
     bubble.addEventListener('click', function(evt) {
@@ -200,7 +195,7 @@ function toggleNightMode() {
 
 
 function clickMenu() {
-    if (width > minWidth) {
+    if (!isMobile) {
         document.getElementById("main--body").classList.add("side--menu--shift--main--body");
         document.getElementById("top--bar").classList.add("side--menu--shift--top--bar");
         document.getElementById("side--menu").classList.add("side--menu--shift--side--menu");
@@ -219,8 +214,11 @@ function clickMenu() {
     document.getElementById("arrowbar1").classList.add("arrowbar1--clicked");
     document.getElementById("arrowbar2").classList.add("arrowbar2--clicked");
     document.getElementById("arrowbar3").classList.add("arrowbar3--clicked");
+    
+    // this is set to 0 on resize
+    document.getElementById("side--menu").style.removeProperty("transition");
 
-    if (width < 1000 && width > minWidth) {
+    if (width < 1000 && !isMobile) {
         // this delay prevents this call to conflict with the one in onResizeFunction
         // REMEMBER setTimeout is asynchronous, so other functions will not pause
         setTimeout(() => {  stackBanner(); }, sideMenuTransitionDuration);
@@ -253,7 +251,7 @@ function unclickMenu() {
     document.getElementById("top--bar").style.removeProperty("transition");
     document.getElementById("side--menu").style.removeProperty("transition");
 
-    if (width < 1000 && width > minWidth) {
+    if (width < 1000 && !isMobile) {
         setTimeout(() => {  unstackBanner(); }, sideMenuTransitionDuration);
     }
 }
@@ -406,7 +404,7 @@ function adjustTimelineHeight() {
     var height2 = containerHeights[1]
     var height3 = containerHeights[2]
 
-    if (width > minWidth) {
+    if (!isMobile) {
 
         document.getElementById("l1").style.height = (height1 + 10 + 30) + "px";  // +30 is from about--me--page margin
         document.getElementById("l3").style.height = (height2 + 4) + "px";
@@ -435,7 +433,7 @@ function adjustTimelineHeight() {
         document.getElementById("c3").style.top = (height1 + height2 + Math.round(window.innerHeight / 10) + Math.round(window.innerHeight / 15)) + "px";
     }
 
-    if (width > minWidth) {
+    if (!isMobile) {
         c2Top = parseFloat(document.getElementById('c2--move').style.top);
         c3Top = parseFloat(document.getElementById('c3--move').style.top);
     }
@@ -455,7 +453,7 @@ function moveTimelineDot() {
     var circleTopsArray = [];
     var lineNames = [];
     var lineLenTot = 0;
-    if (width < minWidth) {
+    if (isMobile) {
         circleNames = ["c1--move","c--mobile--start"];
         circleTopsArray = [-140, -40];
         lineNames = ["l1","l3"];
@@ -517,7 +515,7 @@ function scrollDragTimeline() {
     let timelineCirclesNames = [];
     let lineNames = [];
     let lineLenTot = 0;
-    if (width < minWidth) {
+    if (isMobile) {
         timelineCirclesNames = ["c1--move","c--mobile--start"];
         lineNames = ["l1","l3"];
     }
@@ -609,7 +607,7 @@ function deactivateProjectCard(cardElement) {
     spanElement.classList.remove("project--card--span--active");
     for (let m of markElements) {
         m.classList.remove("card--highlight--active");
-    }   
+    }
 }
 
 
@@ -650,6 +648,7 @@ function clickProjectCard(evt) {
 
 
     if (cardElement != previousClickedCard) {
+        cardElement.setAttribute('data-clicked', true);
         cardElement.parentElement.classList.add("card--container--expanded");
         cardElement.nextElementSibling.classList.add("project--explanation--expanded");
         // timeout to move content in after card is expanded
@@ -667,6 +666,7 @@ function clickProjectCard(evt) {
         }
     }
     else {  // reclick
+        cardElement.setAttribute('data-clicked', false);
         // timeout is so content moves and then card collapses
         setTimeout(function() {cardElement.parentElement.classList.remove("card--container--expanded")}, 200);
         setTimeout(function() {cardElement.nextElementSibling.classList.remove("project--explanation--expanded")}, 200);
@@ -705,21 +705,21 @@ function adjustInterestsBubblesPositions() {
     const container = document.getElementById("interests--page");
     var topStart = paragraph.offsetHeight + 100 + 30;  // 30 is padding, 100 is aesthethics
     var containerWidth = container.getBoundingClientRect().width - 60;  // 60 is 2*padding
-    var bubbleHeight = bubbles[0].offsetHeight;
+    var bubbleWidth = bubbles[0].offsetWidth;  // height is set later to be same as width
 
     var bubbleGap = 10;
     if (isMobile) {
         bubbleGap = 50;
     }
 
-    var containerHeightTotal = topStart + ((bubbleHeight+bubbleGap)*bubbles.length);
+    var containerHeightTotal = topStart + ((bubbleWidth+bubbleGap)*bubbles.length);
     container.style.height = containerHeightTotal + "px";
 
     var leftPerc = [0.2, 0.7, 0.5, 0.1, 0.7, 0.3];
     for (var i=0; i<bubbles.length; i++) {
         bubble = bubbles[i];
         bubble.style.transition = "none";  // remove transition only for resize
-        topPos = topStart + (bubbleHeight+bubbleGap)*i;
+        topPos = topStart + (bubbleWidth+bubbleGap)*i;
         bubble.style.top = topPos + "px";
         leftPos = leftPerc[i]*containerWidth;
         bubble.style.left = leftPos + "px";
@@ -817,6 +817,21 @@ function escBubbleOnClick() {
     setTimeout(function() {popBubbleEsc();}, 200);
 }
 
+
+function adjustGolSizes() {
+    const golCanvas = document.getElementById("gol--canvas");
+    const golContext = golCanvas.getContext('2d');
+    const golContainer = document.getElementById("gol--content");
+    const golControls = document.getElementById("gol--controls");
+    const golParagraph = document.getElementById("gol--content").firstElementChild;
+    golCanvas.width = golContainer.offsetWidth;
+    // this resises recursively every time you resize becuase the paragraph height depends on the canvas height -- NOT GOOD!
+    golCanvas.height = golContainer.offsetHeight - golControls.offsetHeight - golParagraph.offsetHeight;
+    console.log(golContainer.offsetHeight,golControls.offsetHeight,golParagraph.offsetHeight)
+}
+
+
+
 ///////////////////////////////////////////////////////////////////////////
 
 
@@ -826,7 +841,9 @@ function onLoadFunction() {
     var loadPage = document.getElementsByClassName("loader--page")[0];
     setTimeout(function() {loadPage.classList.add("page--loaded")}, 500);
 
+    onResizeFunction(first_call=true);
     onScrollFunction();
+    
     isLoaded = true;
 }
 
@@ -854,10 +871,9 @@ function onResizeFunction(first_call=false) {
     width = window.innerWidth;
     // width = document.body.clientWidth;
     scrollbarWidth = window.innerWidth - document.body.clientWidth;
-    isMobile = (height < minHeight) || (width < minWidth);
+    isMobile = width < minWidth;
 
     onScrollFunction();  // hacky but makes sure everything is in place, needs to be here before other stuff
-
 
     if (document.getElementById("side--menu").classList.contains("side--menu--shift--side--menu")) {
         // because I am transitioning when opening the side menu, topbar and sidemenu still have a 
@@ -866,16 +882,16 @@ function onResizeFunction(first_call=false) {
         // we still have smooth transition to transarent
         // these properties are removed when unclicking the menu, returning the elements to their default behaviour
         document.getElementById("top--bar").style.transition = "left 0s ease, width 0s ease, margin-left 0s ease, background-color 0.3s ease";
-        document.getElementById("side--menu").style.transitionDuration = "left 0s ease, width 0s ease, margin-left 0s ease";
     }
+    document.getElementById("side--menu").style.transition = "left 0s ease, width 0s ease, margin-left 0s ease";
 
     // if we cross minWidth close menu -- this is a lot simpler and less messy looking than closing old menu and reopeining new one, or transforming between the two
-    if ( ((lastWidth<minWidth)&&(width>minWidth)) || ((lastWidth>minWidth)&&(width<minWidth))) {
+    if ( ((document.getElementById("side--menu").classList.contains("side--menu--overflow"))&&(!isMobile)) || ((document.getElementById("side--menu").classList.contains("side--menu--shift--side--menu"))&&(isMobile)) ) {
         unclickMenu();
     }
     
     mainBodyWidth = document.getElementById("main--body").offsetWidth;
-    if (width > minWidth) {
+    if (!isMobile) {
         if (mainBodyWidth < (minWidth-scrollbarWidth)) {
             stackBanner();
         }
@@ -888,7 +904,7 @@ function onResizeFunction(first_call=false) {
         document.getElementById("job--title").innerHTML = "Software Engineer\nand Data Scientist";
     }
 
-    if (width > minWidth) {
+    if (!isMobile) {
         document.getElementById("durham").innerHTML = "DUR\n_HAM"
         document.getElementById("milan").innerHTML = "MIL\n_ANO"
         document.getElementById("oxford").innerHTML = "OXF\n_ORD"
@@ -904,6 +920,8 @@ function onResizeFunction(first_call=false) {
     scrollDragTimeline();
     adjustInterestsBubblesPositions();
     adjustBubbleLinesPositions();  // needs to be called after adjusting bubbles posns
+
+    adjustGolSizes();
 
     lastWidth = width;
     lastHeight = height;
@@ -933,18 +951,32 @@ for (let lt of letterTiles) {
     letterScores.push(-1);
 }
 
-var ignoreClickOnBoard = document.getElementById('game--board');
-var ignoreClickOnCard = document.getElementById('wordle--card');
-var ignoreClickOnLetters = document.getElementById('letter--list');
 document.addEventListener('click', function(event) {
-    var isClickInsideBoard = ignoreClickOnBoard.contains(event.target);
-    var isClickInsideCard = ignoreClickOnCard.contains(event.target);
-    var isClickInsideLetters = ignoreClickOnLetters.contains(event.target);
-    if (!isClickInsideBoard && !isClickInsideCard && !isClickInsideLetters) {
+    var isClickInsideContent = document.getElementById('wordle--content').contains(event.target);
+    var isClickInsideCard = document.getElementById('wordle--card').contains(event.target);
+    if (!isClickInsideContent && !isClickInsideCard) {
         document.removeEventListener('keydown', wordleOnKeyPress, true);
+        deactivateWordleClone();
         gameBoardIsActive = false;
     }
 });
+
+function activateWordleClone() {
+    document.getElementById('game--board').style.opacity = 1;
+    document.getElementById('letter--list').style.opacity = 1;
+    gameBoardIsActive = true;
+    document.addEventListener('keydown', wordleOnKeyPress, true);
+    for (let lt of letterTiles) {
+        lt.addEventListener('click', wordleOnKeyPress, true);
+        }
+}
+
+function deactivateWordleClone() {
+    document.getElementById('game--board').style.opacity = 0.3;
+    document.getElementById('letter--list').style.opacity = 0.3;
+    gameBoardIsActive = false;
+    document.removeEventListener('keydown', wordleOnKeyPress, true);
+}
 
 function runWordleClone() {
     if (gameBoardIsActive) {
@@ -989,6 +1021,7 @@ function wordleOnKeyPress(event) {
     activeTile = boardTiles[activeTileN]
 
     if (letterPressed == 'BACKSPACE') {
+        event.preventDefault();
         if (activeTileN%5 ==0 && parseInt(activeTileN/5) == rowsGuessed) {
             return null;
         }
@@ -1003,6 +1036,7 @@ function wordleOnKeyPress(event) {
     if (guessedWord.length == 5) {
         if (letterPressed == 'ENTER') {
             if (!doesWordExists(guessedWord)) {
+                shakeRow(activeTileN);
                 guessSubmitted = false;
                 return null;
             }
@@ -1087,11 +1121,9 @@ function getWordScores(guessedWord, wordToGuess) {
         let correctLetter = wordToGuess[i];            
         let maxRating = 0;
         let rightPos = 0;
-        let foundLetter = false;
         for (var j=0; j<5; j++) {
             let myLetter = guessedWord[j];
             if (myLetter == correctLetter) {
-                foundLetter = true;
                 if (i==j) {
                     maxRating = 2;
                     rightPos = j;
@@ -1103,13 +1135,30 @@ function getWordScores(guessedWord, wordToGuess) {
                 }
             }
         }
-        if (foundLetter) {
+        if (maxRating>ratingsArray[rightPos]) {
             ratingsArray[rightPos] = maxRating;
         }
     }
 
     return ratingsArray;
 }
+
+function shakeRow(activeTileN) {
+    var tilesToShake = [];
+    for (var i=0;i<5;i++) {
+        tilesToShake.push(boardTiles[activeTileN-i-1]);
+    }
+    for (let tile of tilesToShake) {
+        tile.style.animation = "shake 0.3s ease 0s 1";
+    }
+    setTimeout(() => {
+        for (let tile of tilesToShake) {
+            tile.style.animation = "";
+        }
+    }, 300);
+
+}
+
 
 function resetWordle() {
     gameBoardIsActive = false;
@@ -1122,7 +1171,7 @@ function resetWordle() {
     letterScores = [];
     for (let boardTile of boardTiles) {
         boardTile.textContent = "";
-        boardTile.style.background = ""
+        boardTile.style.background = "";
         boardTile.style.opacity = "";
     }
     for (let letter of letterTiles) {
@@ -1132,6 +1181,7 @@ function resetWordle() {
     setTimeout(function() {document.addEventListener('keydown', wordleOnKeyPress, true);}, 400);
     setTimeout(function() {document.getElementsByClassName("endscreen")[0].classList.remove("endscreen--active");}, 400);
     setTimeout(function() {document.getElementsByClassName("reset--arrow")[0].classList.remove("reset--arrow--clicked");}, 1000);
+    gameBoardIsActive = true;
 }
 
 function doesWordExists(word) {
@@ -1140,3 +1190,8 @@ function doesWordExists(word) {
     }
     return false;
 }
+
+
+///////////////////////////////////////////////////////////////////////////
+
+
