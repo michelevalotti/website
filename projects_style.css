@@ -232,6 +232,8 @@
     width: max(230px, 80%);
     margin-right: 50px;
     place-self: center;
+    opacity: 1;
+    transition: 0.2s opacity linear;
 }
 span.letter {
     border: 1px solid rgba(var(--content-color-600), 1);
@@ -263,6 +265,8 @@ span.letter {
     place-self: center;
     width: max(230px, 80%);
     margin: 10% 0;
+    opacity: 1;
+    transition: 0.2s opacity linear;
 }
 #game--board > span.board--tile {
     border: 1px solid rgb(var(--content-color-600), 1);
@@ -272,6 +276,8 @@ span.letter {
     justify-content: center;
     align-items: center;
     color: rgb(var(--content-color-400));
+    opacity: 1;
+    transition: opacity 0.2s linear, background 0.2s linear;
 }
 
 .endscreen {
@@ -329,6 +335,17 @@ span.letter {
     transform: rotate(90deg);
 }
 
+@keyframes shake {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-10deg);
+    }
+    75% {
+        transform: rotate(10deg);
+    }
+}
 
 @media screen and (max-width: 900px) {
     #wordle--content {
@@ -343,3 +360,15 @@ span.letter {
 }
 
 /* ////////////////////////////////////////////////////////////////// */
+
+
+#gol--canvas {
+    border: 1px solid black;
+}
+
+#gol--controls {
+    border: 1px solid red;
+    height: 40px;
+    width: 100%;
+    place-self: end center;
+}
