@@ -166,10 +166,14 @@
 .timeline--circle--in--focus {
     border: 3px solid rgba(var(--accent-color), 1);
 }
-.timeline--circle > p {
+.timeline--circle > p,
+.timeline--mid--stud > p {
     position: relative;
     top: -30px;
     left: 20px;
+}
+.timeline--mid--stud > p {
+    top: -15px;
 }
 
 #c1--move,
@@ -182,11 +186,12 @@
 }
 
 #c2--move,
-#c2{
+#c2 {
     left: 40%;
 }
 
-#c2 > p {
+#c2 > p,
+.timeline--mid--stud--text--left > p {
     left: -6em;
 }
 
@@ -222,6 +227,10 @@
 }
 #l5 > .timeline--stud {
     top: 100%;
+}
+
+.timeline--mid--stud--text--left {
+    left: calc(60% + 10px);
 }
 
 #l1,
@@ -268,16 +277,22 @@
         top: 100%;
         visibility: visible;
     }
+    .timeline--mid--stud {
+        left: -15px;
+    }
     #l5,
     #l4 {
         visibility: hidden;
     }
 
-    .timeline--circle > p {
-        top: -10px;
+    .timeline--circle > p,
+    .timeline--mid--stud > p {
+        top: -5px;
         font-size: 10px;
+        left: 20px;
     }
-    .timeline--circle > p::first-letter {
+    .timeline--circle > p::first-letter,
+    .timeline--mid--stud > p::first-letter {
         font-size: 16px;
     }
     #c2 > p,
@@ -285,7 +300,10 @@
     #c4 > p{
         left: 20px;
     }
-    
+    #c1 > p{
+        top: 0px;
+    }
+
     #c1--move,
     #c1 {
         top: -140px;
